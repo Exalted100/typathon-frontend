@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   padding: 0;
@@ -15,12 +19,24 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+.login-copy span {
+  position: relative;
+  opacity: 0;
+  animation: move-text 0.75s forwards;
+}
+
+@keyframes move-text {
+  0% { bottom: -0.2em; opacity: 1; }
+  50% { bottom: 0.2em; }
+  100% { bottom: 0; opacity: 1; }
+}
+
+.final-copy {
+  animation: move-down 1s linear forwards;
+}
+
+@keyframes move-down {
+  0% { padding-top: 80px; }
+  50% { padding-top: 80px; }
+  100% { padding-top: 200px; }
 }
