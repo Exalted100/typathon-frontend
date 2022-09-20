@@ -40,3 +40,8 @@ a {
   20% { padding-top: 80px; }
   100% { padding-top: 250px; }
 }
+
+.flex {
+  display: flex;
+  flex-wrap: nowrap;
+}
