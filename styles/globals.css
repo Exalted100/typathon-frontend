@@ -6,7 +6,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: 'Red Hat Display', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
@@ -37,6 +37,6 @@ a {
 
 @keyframes move-down {
   0% { padding-top: 80px; }
-  50% { padding-top: 80px; }
-  100% { padding-top: 200px; }
+  20% { padding-top: 80px; }
+  100% { padding-top: 250px; }
 }

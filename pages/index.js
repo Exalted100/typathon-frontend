@@ -5,9 +5,9 @@ import { useState, useEffect } from 'react'
 
 export default function Home() {
   const [loginCopy, setLoginCopy] = useState("Type a ton with Typathon")
-  const finalCopy = <p className='final-copy text-semibold h-screen w-2/5 bg-typathon-black text-typathon-grey text-5xl text-center pt-20 transition px-10'>Type a ton with <span className='text-typathon-green'>Typathon</span></p>
+  const finalCopy = <p className='final-copy text-semibold h-screen w-2/5 bg-typathon-black text-typathon-grey text-5xl text-center pt-2 px-10 leading-normal font-bold'>Type a ton with <span className='text-typathon-green'>Typathon</span></p>
 
-  const animatedText = <p className='login-copy text-semibold h-screen w-2/5 bg-typathon-black text-typathon-grey text-5xl text-center pt-20 px-10' aria-label={loginCopy}>
+  const animatedText = <p className='login-copy text-semibold h-screen w-2/5 bg-typathon-black text-typathon-grey text-5xl text-center pt-20 px-10 leading-normal font-bold' aria-label={loginCopy}>
   {loginCopy.split("").map(function(char, index){
       const style = {"animation-delay": (1 + index / loginCopy.length) + "s"};
       return <span aria-hidden="true" key={index} style={style}>{char}</span>;
@@ -23,7 +23,9 @@ export default function Home() {
   }, [])
 
     return(
-        textToDisplay
+        <div>
+          {textToDisplay}
+        </div>
     );
   // return (
   //   <div className={styles.container}>
