@@ -3,9 +3,15 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useCookies } from "react-cookie";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function Home() {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL
+  const router = useRouter()
   const [loginCopy, setLoginCopy] = useState("Type a ton with Typathon");
+  const [cookies, setCookie, removeCookie] = useCookies(["accessToken"]);
   const finalCopy = (
     <p className="final-copy text-semibold h-screen bg-typathon-black text-typathon-grey text-5xl pt-2 px-10 leading-normal font-bold">
       Type a ton with <span className="text-typathon-green">Typathon</span>
@@ -34,7 +40,28 @@ export default function Home() {
   const [passwordIsFocused, setPasswordIsFocused] = useState(false);
   const [passwordValue, setPasswordValue] = useState("");
 
+  const onButtonClick = async (e) => {
+    e.preventDefault()
+
+    try {
+
+      const response = await axios.post(`${API_URL}/login`, {
+          email: emailValue,
+          password: passwordValue,
+      });
+
+      setCookie("accessToken", response.data.token);
+      console.log(response)
+      router.push("/home");
+  } catch (err) {
+      console.log(err.response.data.error)
+  } finally {
+
+  }
+  }
+
   useEffect(() => {
+    console.log(API_URL)
     setTimeout(() => {
       return setTextToDisplay(finalCopy);
     }, loginCopy.length * 100);
@@ -113,6 +140,7 @@ export default function Home() {
 
           <button
             className={`w-80 mb-5 rounded-3xl cursor-text border p-3 relative z-0 bg-typathon-green text-white font-semibold cursor-pointer mt-10`}
+            onClick={onButtonClick}
           >
             Sign in
           </button>
