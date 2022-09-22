@@ -45,3 +45,13 @@ a {
   display: flex;
   flex-wrap: nowrap;
 }
+
+.slide-out {
+  animation: slide-out 1s linear forwards;
+}
+
+@keyframes slide-out {
+  0% { margin-right: -300px; }
+  50% { margin-right: 100px; }
+  100% { margin-right: 10px; }
+}
