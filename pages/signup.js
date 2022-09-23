@@ -64,6 +64,7 @@ export default function Login() {
         <h1 className="text-4xl font-semibold pb-16">Sign up</h1>
         <form className="w-80 mx-auto">
           <Input
+          fieldId="email"
             inputIsFocused={emailIsFocused}
             inputValue={emailValue}
             setInputIsFocused={setEmailIsFocused}
@@ -73,6 +74,7 @@ export default function Login() {
           />
 
           <Input
+          fieldId="username"
             inputIsFocused={userNameIsFocused}
             inputValue={userNameValue}
             setInputIsFocused={setUserNameIsFocused}
@@ -82,6 +84,7 @@ export default function Login() {
           />
 
           <Input
+          fieldId="name"
             inputIsFocused={nameIsFocused}
             inputValue={nameValue}
             setInputIsFocused={setNameIsFocused}
@@ -91,6 +94,7 @@ export default function Login() {
           />
 
           <Input
+          fieldId="password"
             inputIsFocused={passwordIsFocused}
             inputValue={passwordValue}
             setInputIsFocused={setPasswordIsFocused}
@@ -100,6 +104,7 @@ export default function Login() {
           />
 
           <Input
+          fieldId="confirm-password"
             inputIsFocused={confirmPasswordIsFocused}
             inputValue={confirmPasswordValue}
             setInputIsFocused={setConfirmPasswordIsFocused}

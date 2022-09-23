@@ -10,7 +10,7 @@ module.exports = {
         'typathon-black': '#13191C',
         'typathon-grey': '#BCBCBC',
         'typathon-green': '#38A2A5',
-      }
+      },
     },
   },
   plugins: [],

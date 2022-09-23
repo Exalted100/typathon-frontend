@@ -48,6 +48,7 @@ export default function Signup() {
         <h1 className="text-4xl font-semibold pb-16">Sign in</h1>
         <form className="w-80 mx-auto">
           <Input
+          fieldId="email"
             inputIsFocused={emailIsFocused}
             inputValue={emailValue}
             setInputIsFocused={setEmailIsFocused}
@@ -65,6 +66,7 @@ export default function Signup() {
           </span>
 
           <Input
+          fieldId="password"
             inputIsFocused={passwordIsFocused}
             inputValue={passwordValue}
             setInputIsFocused={setPasswordIsFocused}

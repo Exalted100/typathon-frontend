@@ -22,9 +22,7 @@ const Home = () => {
   const onTextareaChange = (e) => {
     if (
       e.target.value[e.target.value.length - 1] ===
-      toType[e.target.value.length - 1]
-      // &&
-      // e.target.value.length - typedResponse.length === 1
+      toType[e.target.value.length - 1] && e.target.value.length - typedResponse.length === 1
     ) {
       setTypedResponse(e.target.value);
     }

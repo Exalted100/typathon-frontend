@@ -45,6 +45,10 @@ export default function Profile() {
       setErrorMessage("Both password fields must be the same.");
       return;
     }
+    if (!passwordValue || !confirmPasswordValue) {
+        setErrorMessage("All input fields must be filled.")
+        return;
+      }
     const headers = {
       "Content-Type": "application/json",
       Authentication: `Bearer ${cookies.accessToken}`,
@@ -80,6 +84,7 @@ export default function Profile() {
       </ol>
       <form>
         <Input
+        fieldId="password"
           inputIsFocused={passwordIsFocused}
           inputValue={passwordValue}
           setInputIsFocused={setPasswordIsFocused}
@@ -89,6 +94,7 @@ export default function Profile() {
         />
 
         <Input
+        fieldId="confirm-password"
           inputIsFocused={confirmPasswordIsFocused}
           inputValue={confirmPasswordValue}
           setInputIsFocused={setConfirmPasswordIsFocused}

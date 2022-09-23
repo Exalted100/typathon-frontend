@@ -1,6 +1,12 @@
-const Input = ({ inputValue, setInputValue, setInputIsFocused, inputIsFocused, fieldName, inputType }) => {
+const Input = ({ inputValue, setInputValue, setInputIsFocused, inputIsFocused, fieldName, inputType, fieldId }) => {
+  const focusField = () => {
+    setInputIsFocused(true)
+    document.getElementById(fieldId).focus()
+}
+
     return (
         <div
+            onClick={()=>{focusField()}} 
             className={`w-80 mb-5 rounded-3xl cursor-text border py-3 px-6 relative z-0 ${
               inputIsFocused || inputValue !== ""
                 ? "border-black box-shadow-bottom-solid"
@@ -14,6 +20,7 @@ const Input = ({ inputValue, setInputValue, setInputIsFocused, inputIsFocused, f
               {fieldName}
             </label>
             <input
+              id={fieldId} 
               type={inputType}
               className={`z-30 border-transparent bg-transparent outline-none w-full`}
               onChange={(e) => {

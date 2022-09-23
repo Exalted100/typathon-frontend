@@ -47,6 +47,7 @@ export default function ForgotPassword() {
         <h1 className="text-4xl font-semibold pb-16">Reset your password</h1>
         <form className="w-80 mx-auto">
           <Input
+          fieldId="email"
             inputIsFocused={emailIsFocused}
             inputValue={emailValue}
             setInputIsFocused={setEmailIsFocused}
