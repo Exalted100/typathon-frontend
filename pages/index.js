@@ -57,7 +57,7 @@ export default function Signup() {
           />
 
           <span className="ml-48">
-            <Link href="">
+            <Link href="/forgot-password">
               <a className="text-typathon-green text-sm font-semibold">
                 Forgot password?
               </a>

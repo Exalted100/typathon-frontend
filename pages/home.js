@@ -1,20 +1,30 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import ProgressBar from "../components/ProgressBar";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 const Home = () => {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const [cookies, setCookie, removeCookie] = useCookies(["accessToken"]);
   const [timeTypingStarted, setTimeTypingStarted] = useState();
   const [timeTypingEnded, setTimeTypingEnded] = useState();
   const [layout, setLayout] = useState("up-and-down");
+  const [mode, setMode] = useState("sprint");
   const [typedResponse, setTypedResponse] = useState("");
   const toType =
-    "This is a random block of text for the purpose of developing the web application. I hope you enjoy trying this out, cheers.";
+    mode === "sprint"
+      ? "This is a random block of text for the purpose of developing the web application. I hope you enjoy trying this out, cheers."
+      : mode === "middleDistance"
+      ? "This is another random block of text for the purpose of weveloping the web application. I hope you enjoy trying it out, cheers. It needs to be longer so I am adding more text. Welcome, ladies and gentlemen, to the middle distance game mode. Get running (or more appropriately in this case, typing)."
+      : "This is another random block of text for the purpose of weveloping the web application. I hope you enjoy trying it out, cheers. It needs to be longer so I am adding more text. Welcome, ladies and gentlemen, to the marathon game mode. Get running (or more appropriately in this case, typing). As you likely know, a marathon is usually long. So the text needs to go on and on and on, you get the drift. Did you know that unnecessary text to make a piece of writing longer is called fluff? The irony about commercial writing is that while fluff is a sign of bad writing, commercial writing compensates it. This is because commercial writers are often paid based on how much they write.";
 
   const onTextareaChange = (e) => {
     if (
       e.target.value[e.target.value.length - 1] ===
-        toType[e.target.value.length - 1] &&
-      e.target.value.length - typedResponse.length === 1
+      toType[e.target.value.length - 1]
+      // &&
+      // e.target.value.length - typedResponse.length === 1
     ) {
       setTypedResponse(e.target.value);
     }
@@ -36,13 +46,39 @@ const Home = () => {
     }
   };
 
+  const submitScore = async (timeTypingEnded) => {
+    try {
+      const headers = {
+        "Content-Type": "application/json",
+        Authentication: `Bearer ${cookies.accessToken}`,
+      };
+      const body = {
+        user: "user",
+        mode: "sprint",
+        score: Number(
+          ((timeTypingEnded - timeTypingStarted) / 1000).toFixed(2)
+        ),
+      };
+
+      await axios.post(`${API_URL}/game/score`, body, {
+        headers,
+      });
+    } catch (err) {
+      // console.log(err.response.data.error);
+      console.log(err);
+    } finally {
+    }
+  };
+
   useEffect(() => {
     if (typedResponse.length === 1) {
       setTimeTypingStarted(performance.now());
     }
     if (typedResponse.length === toType.length) {
       setTimeTypingEnded(performance.now());
+      submitScore(performance.now());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typedResponse, typedResponse.length]);
 
   const layoutColumns = layout.includes("up-and-down")
@@ -54,7 +90,7 @@ const Home = () => {
     <Layout>
       <div>
         <label>
-          Layout:
+          Game layout:
           <select onChange={(e) => setLayout(e.target.value)} value={layout}>
             <option value="up-and-down">Up and down</option>
             <option value="side-by-side">Side by side</option>
@@ -62,6 +98,17 @@ const Home = () => {
             <option value="side-by-side-reverse">Side by side reverse</option>
           </select>
         </label>
+
+        <label>
+          Game mode:
+          <select onChange={(e) => setMode(e.target.value)} value={mode}>
+            <option value="sprint">Sprint</option>
+            <option value="middleDistance">Middle Distance</option>
+            <option value="marathon">Marathon</option>
+          </select>
+        </label>
+
+        <button onClick={() => setTypedResponse("")} className="border border-red-400">Restart</button>
 
         <div className={`grid gap-4 ${layoutColumns}`}>
           <p className={layoutOrder}>{toType}</p>
@@ -87,7 +134,9 @@ const Home = () => {
                 ((timeTypingEnded - timeTypingStarted) / 1000)
               ).toFixed(2)}{" "}
               characters per second. You typing speed is{" "}
-              {getSpeedPercentile(toType.length / ((timeTypingEnded - timeTypingStarted) / 1000))}
+              {getSpeedPercentile(
+                toType.length / ((timeTypingEnded - timeTypingStarted) / 1000)
+              )}
               .
             </p>
             <p>
