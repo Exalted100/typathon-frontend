@@ -52,7 +52,7 @@ const Home = () => {
       };
       const body = {
         user: "user",
-        mode: "sprint",
+        mode: mode,
         score: Number(
           ((timeTypingEnded - timeTypingStarted) / 1000).toFixed(2)
         ),

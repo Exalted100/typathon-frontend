@@ -40,7 +40,7 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="h-screen w-screen flex">
+    <div className="h-screen w-full flex">
       <Error message={errorMessage} setMessage={setErrorMessage} />
       <div className="w-2/5">{<FormDisplay />}</div>
       <div className="w-3/5 text-center pt-40">

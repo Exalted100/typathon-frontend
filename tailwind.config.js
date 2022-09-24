@@ -11,6 +11,9 @@ module.exports = {
         'typathon-grey': '#BCBCBC',
         'typathon-green': '#38A2A5',
       },
+      wdith: {
+        "tablet": "320px",
+      },
     },
   },
   plugins: [],
