@@ -14,7 +14,7 @@ const Input = ({ inputValue, setInputValue, setInputIsFocused, inputIsFocused, f
             }`}
           >
             <label
-              className={`text-md cursor-text z-10 absolute top-2 left-4 px-3 py-1 transition duration-200 bg-white 
+              className={`text-md text-typathon-grey cursor-text z-10 absolute top-2 left-4 px-3 py-1 transition duration-200 bg-white 
                     ${inputIsFocused || inputValue !== "" ? "-translate-y-6" : "translate-y-0"}`}
             >
               {fieldName}

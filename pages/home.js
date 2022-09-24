@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import ProgressBar from "../components/ProgressBar";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import Error from "../components/Error";
 
 const Home = () => {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -12,12 +13,13 @@ const Home = () => {
   const [layout, setLayout] = useState("up-and-down");
   const [mode, setMode] = useState("sprint");
   const [typedResponse, setTypedResponse] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const toType =
     mode === "sprint"
       ? "This is a random block of text for the purpose of developing the web application. I hope you enjoy trying this out, cheers."
       : mode === "middleDistance"
-      ? "This is another random block of text for the purpose of weveloping the web application. I hope you enjoy trying it out, cheers. It needs to be longer so I am adding more text. Welcome, ladies and gentlemen, to the middle distance game mode. Get running (or more appropriately in this case, typing)."
-      : "This is another random block of text for the purpose of weveloping the web application. I hope you enjoy trying it out, cheers. It needs to be longer so I am adding more text. Welcome, ladies and gentlemen, to the marathon game mode. Get running (or more appropriately in this case, typing). As you likely know, a marathon is usually long. So the text needs to go on and on and on, you get the drift. Did you know that unnecessary text to make a piece of writing longer is called fluff? The irony about commercial writing is that while fluff is a sign of bad writing, commercial writing compensates it. This is because commercial writers are often paid based on how much they write.";
+      ? "This is another random block of text for the purpose of developing the web application. I hope you enjoy trying it out, cheers. It needs to be longer so I am adding more text. Welcome, ladies and gentlemen, to the middle distance game mode. Get running (or more appropriately in this case, typing)."
+      : "This is another random block of text for the purpose of developing the web application. I hope you enjoy trying it out, cheers. It needs to be longer so I am adding more text. Welcome, ladies and gentlemen, to the marathon game mode. Get running (or more appropriately in this case, typing). As you likely know, a marathon is usually long. So the text needs to go on and on and on, you get the drift. Did you know that unnecessary text to make a piece of writing longer is called fluff? The irony about commercial writing is that while fluff is a sign of bad writing, commercial writing compensates it. This is because commercial writers are often paid based on how much they write.";
 
   const onTextareaChange = (e) => {
     if (
@@ -62,8 +64,7 @@ const Home = () => {
         headers,
       });
     } catch (err) {
-      // console.log(err.response.data.error);
-      console.log(err);
+      setErrorMessage(err.response.data.error)
     } finally {
     }
   };
@@ -88,10 +89,11 @@ const Home = () => {
 
   return (
     <Layout>
+      <Error message={errorMessage} setMessage={setErrorMessage} />
       <div>
-        <label>
+        <label className="font-semibold">
           Game layout:
-          <select onChange={(e) => setLayout(e.target.value)} value={layout}>
+          <select onChange={(e) => setLayout(e.target.value)} value={layout} className="font-normal cursor-pointer w-fit border border-typathon-grey px-4 py-2 ml-4 mr-12 border-2">
             <option value="up-and-down">Up and down</option>
             <option value="side-by-side">Side by side</option>
             <option value="up-and-down-reverse">Up and down reverse</option>
@@ -99,23 +101,23 @@ const Home = () => {
           </select>
         </label>
 
-        <label>
+        <label className="font-semibold">
           Game mode:
-          <select onChange={(e) => setMode(e.target.value)} value={mode}>
+          <select onChange={(e) => setMode(e.target.value)} value={mode} className="font-normal cursor-pointer w-fit border border-typathon-grey px-4 py-2 ml-4 mr-12 border-2">
             <option value="sprint">Sprint</option>
             <option value="middleDistance">Middle Distance</option>
             <option value="marathon">Marathon</option>
           </select>
         </label>
 
-        <button onClick={() => setTypedResponse("")} className="border border-red-400">Restart</button>
+        <button onClick={() => setTypedResponse("")} className="font-semibold cursor-pointer w-fit bg-typathon-green text-white px-4 py-2 ml-20">Restart</button>
 
-        <div className={`grid gap-4 ${layoutColumns}`}>
-          <p className={layoutOrder}>{toType}</p>
+        <div className={`grid gap-4 mt-16 ${layoutColumns}`}>
+          <p className={`mx-auto w-4/5 text-center ${layoutOrder}`}>{toType}</p>
           <textarea
             onChange={onTextareaChange}
             value={typedResponse}
-            className="border border-red-400"
+            className="border border-2 border-typathon-grey rounded outline-typathon-green px-4 py-2"
           />
         </div>
 
@@ -125,7 +127,7 @@ const Home = () => {
 
         {typedResponse.length === toType.length && (
           <>
-            <p>
+            <p className="mt-10">
               You spent{" "}
               {((timeTypingEnded - timeTypingStarted) / 1000).toFixed(2)}{" "}
               seconds, at{" "}

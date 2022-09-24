@@ -18,7 +18,7 @@ export default function Signup() {
   const [errorMessage, setErrorMessage] = useState("")
 
   const onGuestClick = () => {
-    setCookie("accessToken", "guest");
+      setCookie("accessToken", "guest");
       router.push("/home");
   }
 
@@ -97,7 +97,7 @@ export default function Signup() {
         </p>
 
         <button
-            className={`w-80 mb-5 rounded-3xl cursor-text border p-3 relative z-0 bg-typathon-green text-white font-semibold cursor-pointer mt-10`}
+            className={`w-80 mb-5 rounded-3xl cursor-text border p-3 relative z-0 bg-typathon-grey text-white font-semibold cursor-pointer mt-10`}
             onClick={onGuestClick}
           >
             Play as Guest

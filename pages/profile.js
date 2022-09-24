@@ -63,7 +63,6 @@ export default function Profile() {
       removeCookie("accessToken", []);
       router.push("/");
     } catch (err) {
-      console.log(err.response.data.error);
       setErrorMessage(err.response.data.error);
     } finally {
     }

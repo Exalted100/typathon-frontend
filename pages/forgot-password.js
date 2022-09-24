@@ -33,8 +33,7 @@ export default function ForgotPassword() {
 
       setPasswordSent("Check your email for the link to reset your password.");
     } catch (err) {
-      console.log(err);
-      //   setErrorMessage(err.response.data.error)
+        setErrorMessage(err.response.data.error)
     } finally {
     }
   };

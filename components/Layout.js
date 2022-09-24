@@ -9,21 +9,22 @@ const Layout = ({children}) => {
     const [cookies, setCookie, removeCookie] = useCookies(["accessToken"]);
 
     const checkForAccess = useCallback(() => {
-        if (cookies.accessToken.split(".").length !== 2 && cookies.accessToken !== "guest") {
-            Router.push("/")
+        if (!cookies.accessToken || (cookies.accessToken?.split(".")?.length !== 3 && cookies.accessToken !== "guest")) {
+            console.log(cookies.accessToken)
+            router.push("/")
         }
-    }, [cookies.accessToken])
+    }, [cookies.accessToken, router])
 
     useEffect(() => checkForAccess(), [checkForAccess])
 
     return (
         <div>
-            <nav className="border-b flex font-semibold py-4 w-fit mx-auto">
-                <Link href="/home"><a className="w-fit mx-12">PLAY</a></Link>
-                {cookies.accessToken !== "guest" && (<><Link href="/scores"><a className="w-fit mx-12">HIGH SCORES</a></Link>
-                <Link href="/profile"><a className="w-fit mx-12">PROFILE</a></Link></>)}
+            <nav className="border-b flex font-bold py-4 w-fit mx-auto">
+                <Link href="/home"><a className={`w-fit mx-12 ${router.pathname.includes("home") ? "text-black" : "text-typathon-grey"}`}>PLAY</a></Link>
+                {cookies.accessToken !== "guest" && (<><Link href="/scores"><a className={`w-fit mx-12 ${router.pathname.includes("scores") ? "text-black" : "text-typathon-grey"}`}>HIGH SCORES</a></Link>
+                <Link href="/profile"><a className={`w-fit mx-12 ${router.pathname.includes("profile") ? "text-black" : "text-typathon-grey"}`}>PROFILE</a></Link></>)}
             </nav>
-            <div>{children}</div>
+            <div className="mx-20 my-10">{children}</div>
         </div>
     )
 }
