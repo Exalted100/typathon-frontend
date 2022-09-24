@@ -75,8 +75,9 @@ export default function Profile() {
   return (
     <Layout>
       <Error message={errorMessage} setMessage={setErrorMessage} />
-      <h1>PROFILE</h1>
-      <ol>
+      <div className="text-center w-fit mx-auto">
+      <h1 className="font-bold text-center text-3xl my-8">PROFILE</h1>
+      <ol className="mb-12">
         <li>Name - {name}</li>
         <li>Username - {userName}</li>
         <li>Email - {email}</li>
@@ -109,6 +110,7 @@ export default function Profile() {
           Change password
         </button>
       </form>
+      </div>
     </Layout>
   );
 }

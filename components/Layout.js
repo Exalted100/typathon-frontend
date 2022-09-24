@@ -9,8 +9,8 @@ const Layout = ({children}) => {
     const [cookies, setCookie, removeCookie] = useCookies(["accessToken"]);
 
     const checkForAccess = useCallback(() => {
+        console.log(cookies.accessToken)
         if (!cookies.accessToken || (cookies.accessToken?.split(".")?.length !== 3 && cookies.accessToken !== "guest")) {
-            console.log(cookies.accessToken)
             router.push("/")
         }
     }, [cookies.accessToken, router])
