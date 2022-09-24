@@ -74,7 +74,9 @@ const Home = () => {
     }
     if (typedResponse.length === toType.length) {
       setTimeTypingEnded(performance.now());
-      submitScore(performance.now());
+      if (cookies.accessToken !== "guest") {
+        submitScore(performance.now());
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typedResponse, typedResponse.length]);

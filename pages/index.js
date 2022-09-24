@@ -17,6 +17,11 @@ export default function Signup() {
   const [passwordValue, setPasswordValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("")
 
+  const onGuestClick = () => {
+    setCookie("accessToken", "guest");
+      router.push("/home");
+  }
+
   const onButtonClick = async (e) => {
     e.preventDefault();
     if (!emailValue || !passwordValue) {
@@ -90,6 +95,13 @@ export default function Signup() {
           </Link>
           .
         </p>
+
+        <button
+            className={`w-80 mb-5 rounded-3xl cursor-text border p-3 relative z-0 bg-typathon-green text-white font-semibold cursor-pointer mt-10`}
+            onClick={onGuestClick}
+          >
+            Play as Guest
+          </button>
       </div>
     </div>
   );
