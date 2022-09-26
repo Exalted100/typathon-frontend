@@ -39,6 +39,10 @@ export default function Login() {
       setErrorMessage("You cannot leave any input blank.");
       return;
     }
+    if (userNameValue.length > 15 || userNameValue < 2) {
+      setErrorMessage("Your username must be between two and fifteen characters long.")
+      return
+    }
 
     try {
       await axios.post(`${API_URL}/signup`, {

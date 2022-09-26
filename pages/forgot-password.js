@@ -64,6 +64,13 @@ export default function ForgotPassword() {
         </form>
 
         <p className="text-typathon-grey mt-10">{passwordSent}</p>
+        <p className="text-typathon-grey mt-10">
+          Remember your password?{" "}
+          <Link href="/">
+            <a className="text-typathon-green">Login now</a>
+          </Link>
+          .
+        </p>
       </div>
     </div>
   );
