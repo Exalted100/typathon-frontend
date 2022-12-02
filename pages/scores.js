@@ -45,21 +45,21 @@ const Scores = () => {
         <div>
           <h3 className="font-bold text-xl">Sprint</h3>
           <ol className="list-decimal">
-            {playerScores.sprint?.map((score, index) => (<li key={index}>{index + 1}. {score.score}</li>))}
+            {playerScores.sprint?.map((score, index) => (<li key={index}>{score.score}</li>))}
           </ol>
         </div>
 
         <div>
           <h3 className="font-bold text-xl">Middle Distance</h3>
           <ol className="list-decimal">
-          {playerScores.middleDistance?.map((score, index) => (<li key={index}>{index + 1}. {score.score}</li>))}
+          {playerScores.middleDistance?.map((score, index) => (<li key={index}>{score.score}</li>))}
           </ol>
         </div>
 
         <div>
           <h3 className="font-bold text-xl">Marathon</h3>
           <ol className="list-decimal">
-          {playerScores.marathon?.map((score, index) => (<li key={index}>{index + 1}. {score.score}</li>))}
+          {playerScores.marathon?.map((score, index) => (<li key={index}>{score.score}</li>))}
           </ol>
         </div>
       </div>
@@ -68,21 +68,21 @@ const Scores = () => {
         <div>
           <h3 className="font-bold text-xl">Sprint</h3>
           <ol className="list-decimal">
-          {globalScores.sprint?.map((score, index) => (<li key={index}>{index + 1}. {score.score} - {score.user}</li>))}
+          {globalScores.sprint?.map((score, index) => (<li key={index}>{score.score} - {score.user}</li>))}
           </ol>
         </div>
 
         <div>
           <h3 className="font-bold text-xl">Middle Distance</h3>
           <ol className="list-decimal">
-          {globalScores.middleDistance?.map((score, index) => (<li key={index}>{index + 1}. {score.score} - {score.user}</li>))}
+          {globalScores.middleDistance?.map((score, index) => (<li key={index}>{score.score} - {score.user}</li>))}
           </ol>
         </div>
 
         <div>
           <h3 className="font-bold text-xl">Marathon</h3>
           <ol className="list-decimal">
-          {globalScores.marathon?.map((score, index) => (<li key={index}>{index + 1}. {score.score} - {score.user}</li>))}
+          {globalScores.marathon?.map((score, index) => (<li key={index}>{score.score} - {score.user}</li>))}
           </ol>
         </div>
       </div>

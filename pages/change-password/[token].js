@@ -6,6 +6,7 @@ import axios from "axios";
 import Input from "../../components/Input";
 import FormDisplay from "../../components/FormDisplay";
 import Error from "../../components/Error";
+import Spinner from "../../components/Spinner";
 
 export default function Signup() {
   const router = useRouter();
@@ -17,6 +18,7 @@ export default function Signup() {
   const [passwordIsFocused, setPasswordIsFocused] = useState(false);
   const [passwordValue, setPasswordValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false)
 
   const onButtonClick = async (e) => {
     e.preventDefault();
@@ -35,6 +37,7 @@ export default function Signup() {
     };
 
     const body = { password: passwordValue };
+    setLoading(true)
 
     try {
       await axios.put(`${API_URL}/password/change`, body, {
@@ -45,8 +48,15 @@ export default function Signup() {
       console.log(err.response.data.error);
       setErrorMessage(err.response.data.error);
     } finally {
+      setLoading(false)
     }
   };
+
+  const loginLoading = (
+    <div className="w-full h-full py-2">
+        <Spinner />
+    </div>
+);
 
   return (
     <div className="h-screen w-full flex">
@@ -76,10 +86,10 @@ export default function Signup() {
           />
 
           <button
-            className={`w-80 mb-5 rounded-3xl cursor-text border p-3 relative z-0 bg-typathon-green text-white font-semibold cursor-pointer mt-10`}
+            className={`w-80 mb-5 rounded-3xl cursor-text border h-12 relative z-0 bg-typathon-green text-white font-semibold cursor-pointer mt-10`}
             onClick={onButtonClick}
           >
-            Change Password
+            {loading ? loginLoading : "Change password"}
           </button>
         </form>
       </div>

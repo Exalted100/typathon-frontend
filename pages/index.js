@@ -6,6 +6,7 @@ import axios from "axios";
 import Input from "../components/Input";
 import FormDisplay from "../components/FormDisplay";
 import Error from "../components/Error";
+import Spinner from "../components/Spinner";
 
 export default function Signup() {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -16,6 +17,7 @@ export default function Signup() {
   const [passwordIsFocused, setPasswordIsFocused] = useState(false);
   const [passwordValue, setPasswordValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const onGuestClick = () => {
       setCookie("accessToken", "guest");
@@ -28,6 +30,7 @@ export default function Signup() {
       setErrorMessage("You cannot leave any input blank.")
       return
   }
+  setLoading(true)
 
     try {
       const response = await axios.post(`${API_URL}/login`, {
@@ -36,14 +39,19 @@ export default function Signup() {
       });
 
       setCookie("accessToken", response.data.token);
-      console.log(response);
       router.push("/home");
     } catch (err) {
-      console.log(err.response.data.error);
       setErrorMessage(err.response.data.error)
     } finally {
+      setLoading(false)
     }
   };
+
+  const loginLoading = (
+    <div className="w-full h-full py-2">
+        <Spinner />
+    </div>
+);
 
   return (
     <div className="h-screen w-full flex">
@@ -81,10 +89,10 @@ export default function Signup() {
           />
 
           <button
-            className={`w-80 mb-5 rounded-3xl cursor-text border p-3 relative z-0 bg-typathon-green text-white font-semibold cursor-pointer mt-10`}
+            className={`w-80 h-12 mb-5 rounded-3xl cursor-text border relative z-0 bg-typathon-green text-white font-semibold cursor-pointer mt-10`}
             onClick={onButtonClick}
           >
-            Sign in
+            {loading ? loginLoading : "Sign in"}
           </button>
         </form>
 

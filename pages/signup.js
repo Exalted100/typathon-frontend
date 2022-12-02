@@ -5,6 +5,7 @@ import axios from "axios";
 import Input from "../components/Input";
 import Error from "../components/Error";
 import FormDisplay from "../components/FormDisplay";
+import Spinner from "../components/Spinner";
 
 export default function Login() {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -21,6 +22,7 @@ export default function Login() {
     useState(false);
   const [confirmPasswordValue, setConfirmPasswordValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false)
 
   const onButtonClick = async (e) => {
     e.preventDefault();
@@ -43,6 +45,7 @@ export default function Login() {
       setErrorMessage("Your username must be between two and fifteen characters long.")
       return
     }
+    setLoading(true)
 
     try {
       await axios.post(`${API_URL}/signup`, {
@@ -56,8 +59,15 @@ export default function Login() {
     } catch (err) {
       setErrorMessage(err.response.data.error);
     } finally {
+      setLoading(false)
     }
   };
+
+  const loginLoading = (
+    <div className="w-full h-full py-2">
+        <Spinner />
+    </div>
+);
 
   return (
     <div className="h-screen w-full flex">
@@ -117,10 +127,10 @@ export default function Login() {
           />
 
           <button
-            className={`w-80 mb-5 rounded-3xl cursor-text border p-3 relative z-0 bg-typathon-green text-white font-semibold cursor-pointer mt-10`}
+            className={`w-80 mb-5 rounded-3xl cursor-text border h-12 relative z-0 bg-typathon-green text-white font-semibold cursor-pointer mt-10`}
             onClick={onButtonClick}
           >
-            Sign up
+            {loading ? loginLoading : "Sign up"}
           </button>
         </form>
 

@@ -5,6 +5,7 @@ import axios from "axios";
 import Input from "../components/Input";
 import Error from "../components/Error";
 import Layout from "../components/Layout";
+import Spinner from "../components/Spinner";
 
 export default function Profile() {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -19,8 +20,10 @@ export default function Profile() {
     useState(false);
   const [confirmPasswordValue, setConfirmPasswordValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false)
 
   const memoizedProfile = useCallback(async () => {
+    setLoading(true)
     try {
       const headers = {
         "Content-Type": "application/json",
@@ -36,6 +39,7 @@ export default function Profile() {
     } catch (err) {
       console.log(err);
     } finally {
+      setLoading(false)
     }
   }, [API_URL, cookies.accessToken]);
 
@@ -72,6 +76,12 @@ export default function Profile() {
     memoizedProfile();
   }, [memoizedProfile]);
 
+  const loginLoading = (
+    <div className="w-full h-full py-2">
+        <Spinner />
+    </div>
+);
+
   return (
     <Layout>
       <Error message={errorMessage} setMessage={setErrorMessage} />
@@ -82,6 +92,9 @@ export default function Profile() {
         <li>Username - {userName}</li>
         <li>Email - {email}</li>
       </ol>
+
+      <h2 className="font-bold text-center text-xl my-8">Change Your Password</h2>
+
       <form>
         <Input
         fieldId="password"
@@ -104,10 +117,10 @@ export default function Profile() {
         />
 
         <button
-          className={`w-80 mb-5 rounded-3xl cursor-text border p-3 relative z-0 bg-typathon-green text-white font-semibold cursor-pointer mt-10`}
+          className={`w-80 mb-5 rounded-3xl cursor-text border h-12 relative z-0 bg-typathon-green text-white font-semibold cursor-pointer mt-10`}
           onClick={onButtonClick}
         >
-          Change password
+          {loading ? loginLoading : "Change Password"}
         </button>
       </form>
       </div>
