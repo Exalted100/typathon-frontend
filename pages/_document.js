@@ -19,7 +19,7 @@ class MyDocument extends Document {
           <Main />
           <NextScript />
 
-          <div className="text-center font-semibold md:hidden absolute top-0 left-0 bg-white w-full h-full z-100 pt-20">
+          <div className="text-center font-semibold md:hidden fixed top-0 left-0 bg-white w-full h-full z-100 pt-20">
             <p>Kindly use a laptop to use the app.</p>
           </div>
         </body>
