@@ -17,8 +17,19 @@ const Layout = ({children}) => {
 
     useEffect(() => checkForAccess(), [checkForAccess])
 
+    const onButtonClick = () => {
+        removeCookie("accessToken", []);
+        router.push("/");
+    };
+
     return (
         <div>
+            <button
+            className="mb-5 px-4 rounded border h-12 bg-typathon-green text-white font-semibold cursor-pointer absolute top-2 right-10"
+            onClick={onButtonClick}
+          >
+            Log Out
+          </button>
             <nav className="border-b flex font-bold py-4 w-fit mx-auto">
                 <Link href="/home"><a className={`w-fit mx-12 ${router.pathname.includes("home") ? "text-black" : "text-typathon-grey"}`}>PLAY</a></Link>
                 {cookies.accessToken !== "guest" && (<><Link href="/scores"><a className={`w-fit mx-12 ${router.pathname.includes("scores") ? "text-black" : "text-typathon-grey"}`}>HIGH SCORES</a></Link>
