@@ -7,7 +7,7 @@ const Input = ({ inputValue, setInputValue, setInputIsFocused, inputIsFocused, f
     return (
         <div
             onClick={()=>{focusField()}} 
-            className={`w-80 mb-5 rounded-3xl cursor-text border py-3 px-6 relative z-0 ${
+            className={`w-40 md:w-80 mb-5 rounded-3xl cursor-text border py-3 px-6 relative z-0 ${
               inputIsFocused || inputValue !== ""
                 ? "border-black box-shadow-bottom-solid"
                 : "border-gray-400"

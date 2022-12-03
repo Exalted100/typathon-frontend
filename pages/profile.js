@@ -117,7 +117,7 @@ export default function Profile() {
         />
 
         <button
-          className={`w-80 mb-5 rounded-3xl cursor-text border h-12 relative z-0 bg-typathon-green text-white font-semibold cursor-pointer mt-10`}
+          className={`w-40 md:w-80 mb-5 rounded-3xl cursor-text border h-12 relative z-0 bg-typathon-green text-white font-semibold cursor-pointer mt-10`}
           onClick={onButtonClick}
         >
           {loading ? loginLoading : "Change Password"}

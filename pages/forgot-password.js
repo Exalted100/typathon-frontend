@@ -53,7 +53,7 @@ export default function ForgotPassword() {
       <div className="w-2/5">{<FormDisplay />}</div>
       <div className="w-3/5 text-center pt-40">
         <h1 className="text-4xl font-semibold pb-16">Reset your password</h1>
-        <form className="w-80 mx-auto">
+        <form className="w-40 md:w-80 mx-auto">
           <Input
           fieldId="email"
             inputIsFocused={emailIsFocused}
@@ -65,7 +65,7 @@ export default function ForgotPassword() {
           />
 
           <button
-            className={`w-80 mb-5 rounded-3xl cursor-text border h-12 relative z-0 bg-typathon-green text-white font-semibold cursor-pointer mt-10`}
+            className={`w-40 md:w-80 mb-5 rounded-3xl cursor-text border h-12 relative z-0 bg-typathon-green text-white font-semibold cursor-pointer mt-10`}
             onClick={onButtonClick}
           >
             {loading ? loginLoading : "Reset password"}

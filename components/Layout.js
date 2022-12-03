@@ -31,9 +31,9 @@ const Layout = ({children}) => {
             Log Out
           </button>
             <nav className="border-b flex font-bold py-4 w-fit mx-auto">
-                <Link href="/home"><a className={`w-fit mx-12 ${router.pathname.includes("home") ? "text-black" : "text-typathon-grey"}`}>PLAY</a></Link>
-                {cookies.accessToken !== "guest" && (<><Link href="/scores"><a className={`w-fit mx-12 ${router.pathname.includes("scores") ? "text-black" : "text-typathon-grey"}`}>HIGH SCORES</a></Link>
-                <Link href="/profile"><a className={`w-fit mx-12 ${router.pathname.includes("profile") ? "text-black" : "text-typathon-grey"}`}>PROFILE</a></Link></>)}
+                <Link href="/home"><a className={`w-fit md:mx-12 ${router.pathname.includes("home") ? "text-black" : "text-typathon-grey"}`}>PLAY</a></Link>
+                {cookies.accessToken !== "guest" && (<><Link href="/scores"><a className={`md:w-fit mx-12 ${router.pathname.includes("scores") ? "text-black" : "text-typathon-grey"}`}>HIGH SCORES</a></Link>
+                <Link href="/profile"><a className={`md:w-fit mx-12 ${router.pathname.includes("profile") ? "text-black" : "text-typathon-grey"}`}>PROFILE</a></Link></>)}
             </nav>
             <div className="mx-20 my-10">{children}</div>
         </div>
